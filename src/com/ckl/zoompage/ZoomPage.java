@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ZoomControls;
 
+//此程序已经提交到github.com
 public class ZoomPage extends Activity implements Observer {
 	private ImageZoomView mZoomView;
 	private ZoomState mZoomState;
