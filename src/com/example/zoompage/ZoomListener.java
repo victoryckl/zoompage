@@ -1,4 +1,4 @@
-package com.ckl.zoompage;
+package com.example.zoompage;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public class ZoomListener implements View.OnTouchListener,
 		final int action = event.getAction();
 		int pointCount = event.getPointerCount();
 		
-		testPoint(event);
+		//testPoint(event);
 		
 		if (mGestureDetector.onTouchEvent(event)) {
 			return true;

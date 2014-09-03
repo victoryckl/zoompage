@@ -1,4 +1,4 @@
-package com.ckl.zoompage;
+package com.example.zoompage;
 
 import java.util.Observable;
 import java.util.Observer;

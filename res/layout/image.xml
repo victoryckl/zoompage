@@ -5,7 +5,7 @@
 	android:orientation="vertical"
 	android:id="@+id/mylayout">
 	
-	<com.ckl.zoompage.ImageZoomView
+	<com.example.zoompage.ImageZoomView
 		android:id="@+id/zoomView"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"

@@ -1,4 +1,4 @@
-package com.ckl.zoompage;
+package com.example.zoompage;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -8,7 +8,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -54,7 +53,7 @@ public class ImageZoomView extends View implements Observer {
     //计算图片映射区域和输出区域
     public void calculateRect() {
     	if (mBitmap != null && mState != null) {
-    		if (mState.isNeedCalculateRect()) {
+    		if (mState.isNeedCalcRect()) {
 	            final int viewWidth = getWidth();
 	            final int viewHeight = getHeight();
 	            final int bitmapWidth = mBitmap.getWidth();
@@ -108,7 +107,7 @@ public class ImageZoomView extends View implements Observer {
 //				logd("mRectDst(" + mRectDst.left + "," + mRectDst.top + ","
 //						+ mRectDst.right + "," + mRectDst.bottom + ")");
 				
-	            mState.setEnableCalculateRect(false);
+	            mState.setEnableCalcRect(false);
 			}
     	}
     }

@@ -1,12 +1,12 @@
-package com.ckl.zoompage;
+package com.example.zoompage;
 
 import java.util.ArrayList;
 import java.util.Observable;
 
-import android.R.anim;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.util.Log;
+
 
 public class ZoomState extends Observable {	
 	
@@ -84,8 +84,8 @@ public class ZoomState extends Observable {
         if (!floatEquel(zoom, mZoom)) {
             mZoom = zoom;
             logd("----> mZoom = " + mZoom);
-            calculateMinMaxPanX();
-            calculateMinMaxPanY();
+            calcPanX();
+            calcPanY();
             setZoomChanged();
         }
     }
@@ -128,8 +128,8 @@ public class ZoomState extends Observable {
     public void startReturnAnimation() {
     	int flag = AnimationFlag.NoAnimation;
     	
-    	flag = calculateNewZoom(flag);
-    	mAnimationFlag = calculateNewPanXY(flag);
+    	flag = calcNewZoom(flag);
+    	mAnimationFlag = calcNewPanXY(flag);
     	setZoomChanged();
     	notifyObservers();
     	
@@ -137,7 +137,7 @@ public class ZoomState extends Observable {
     	//logd("******* AnimationFlag.MASK = " + AnimationFlag.MASK + " *******");
     }
     
-    private int calculateNewZoom(int flag) {
+    private int calcNewZoom(int flag) {
     	mNewZoom = mZoom;
     	if (mZoom < mStdMinZoom) {
     		mNewZoom = mStdMinZoom;
@@ -153,7 +153,7 @@ public class ZoomState extends Observable {
     	return flag;
     }
     
-    private int calculateNewPanXY(int flag) {
+    private int calcNewPanXY(int flag) {
     	
     	mNewPanX = mPanX;
     	if (mPanX < mStdMinPanX) {
@@ -192,7 +192,7 @@ public class ZoomState extends Observable {
     				setZoom(mNewZoom);
     				mAnimationFlag &= ~AnimationFlag.ZOOM;
     			}
-    			mAnimationFlag = calculateNewPanXY(mAnimationFlag);
+    			mAnimationFlag = calcNewPanXY(mAnimationFlag);
     		}
     		
     		if ((mAnimationFlag & AnimationFlag.PANX) != 0) {
@@ -253,9 +253,9 @@ public class ZoomState extends Observable {
                 (((float)mView.getWidth()) / mView.getHeight());
             
             logd("mAspectQuotient = " + mAspectQuotient);
-            calculateMinMaxZoom();
-            calculateMinMaxPanX();
-            calculateMinMaxPanY();
+            calcZoom();
+            calcPanX();
+            calcPanY();
 
             //初始化OK，通知外部，显示小图标
             setZoomChanged();
@@ -263,7 +263,7 @@ public class ZoomState extends Observable {
     	}while(false);
     }
     
-    private void calculateMinMaxZoom() {
+    private void calcZoom() {
     	if (mAspectQuotient > 0) {
     		float bmpW = mBitmap.getWidth();
     		float viewW = mView.getWidth();
@@ -287,7 +287,7 @@ public class ZoomState extends Observable {
 		}
     }
     
-    private void calculateMinMaxPanX() {
+    private void calcPanX() {
     	if (mAspectQuotient > 0) {
     		float bmpW = mBitmap.getWidth();
     		float viewW = mView.getWidth();
@@ -311,7 +311,7 @@ public class ZoomState extends Observable {
 		}
     }
     
-    private void calculateMinMaxPanY() {
+    private void calcPanY() {
     	if (mAspectQuotient > 0) {
     		float bmpH = mBitmap.getHeight();
     		float viewH = mView.getHeight();
@@ -361,22 +361,22 @@ public class ZoomState extends Observable {
 		}
         return panY;
     }
-  //--参数计算---------------------------------------------------------------
+    //--参数计算---------------------------------------------------------------
     
     //控制是否需要重新计算区域
-    private boolean mIsNeedCalculateRect = true;
+    private boolean mIsNeedCalcRect = true;
     
-    public boolean isNeedCalculateRect() {
-    	return mIsNeedCalculateRect;
+    public boolean isNeedCalcRect() {
+    	return mIsNeedCalcRect;
     }
     
-    public void setEnableCalculateRect(boolean calculate) {
-    	mIsNeedCalculateRect = calculate;
+    public void setEnableCalcRect(boolean calculate) {
+    	mIsNeedCalcRect = calculate;
     }
     
     private void setZoomChanged() {
     	setChanged();
-    	setEnableCalculateRect(true);
+    	setEnableCalcRect(true);
     }
     
     //坐标转换
