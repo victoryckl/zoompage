@@ -273,12 +273,11 @@ public class ZoomState extends Observable {
             if (mAspectQuotient > 1) {
             	mStdMinZoom = 1;
             	mMidZoom = mAspectQuotient;
-            	mStdMaxZoom = bmpW / viewW;
             } else {
             	mStdMinZoom = 1;
             	mMidZoom = 1 / mAspectQuotient;
-            	mStdMaxZoom = bmpH / viewH;
             }
+            mStdMaxZoom = mMidZoom * (1 + 0.2f);
             mZoom = mStdMinZoom;
             mMinZoom = mStdMinZoom * (1 - 0.35f);
             mMaxZoom = mStdMaxZoom * (1 + 0.2f);
